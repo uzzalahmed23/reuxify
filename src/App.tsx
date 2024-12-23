@@ -1,3 +1,4 @@
+import FancyBtn from "./components/FancyBtn";
 import Layout from "./components/layout/Layout";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
           totam adipisci!
         </p>
       </section>
+      <FancyBtn />
     </Layout>
   );
 }
