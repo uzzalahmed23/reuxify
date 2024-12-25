@@ -5,11 +5,11 @@ function Modal() {
   const [isExiting, setIsExiting] = useState(false);
   function closeModal() {
     console.log("testing");
-
     setIsExiting(true);
     setTimeout(() => {
       setShowModal(false);
-    }, 400);
+      setIsExiting(false);
+    }, 300);
   }
   useEffect(() => {
     function handleOutSideClick(e) {
@@ -19,13 +19,14 @@ function Modal() {
       }
     }
     document.addEventListener("mousedown", handleOutSideClick);
-  });
+    return () => document.removeEventListener("mousedown", handleOutSideClick);
+  }, [isExiting]);
   return (
     <section className="py-10">
       <div className="container">
         <div
           ref={modal}
-          className={`fixed inset-0 p-20 bg-black/40 z-[1]  justify-center backdrop-blur-sm transition-all duration-300  ${
+          className={`fixed inset-0 p-20 bg-[rgba(255,255,255,0.5)] z-[1]  justify-center backdrop-blur-[4px] transition-all duration-300  ${
             showModal ? "flex" : "hidden"
           }`}
         >
@@ -39,12 +40,26 @@ function Modal() {
                 e.stopPropagation();
                 closeModal();
               }}
-              className="px-3 py-2 text-white bg-red-600 border border-white rounded"
+              className="flex items-center px-3 py-2 text-white bg-red-600 border border-white rounded"
             >
-              Close
+              <svg
+                className="text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+              </svg>
             </button>
             <iframe
-              className="mt-4 rounded-3xl"
+              className="mt-2 rounded-3xl"
               width="560"
               height="315"
               src="https://www.youtube.com/embed/xKIA0QF1lO4?si=UQJDlb8hcBwrYZBH"

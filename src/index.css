@@ -30,7 +30,7 @@ body {
 
 .modalContent {
   animation-duration: 0.4s;
-  animation-timing-function: ease;
+  animation-timing-function: ease-in-out;
 }
 
 .modal-enter {
