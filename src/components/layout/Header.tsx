@@ -19,7 +19,7 @@ function Header() {
         </button>
         {/* Hamburger Icon */}
         <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          onClick={() => setIsMenuOpen(true)}
           className="text-white md:hidden"
         >
           <svg
@@ -45,26 +45,40 @@ function Header() {
             ></path>
           </svg>
         </button>
-        <div>
-          <ul
-            className={`fixed top-16 h-full w-2/3 bg-[#246A52]   flex flex-col items-center gap-4 py-4 text-lg font-medium  
-          transition-all duration-500 ease-in-out shadow-2xl  ${
+        <ul
+          className={`fixed top-16 h-full w-2/3 bg-[#246A52] md:hidden  flex flex-col items-center gap-4 py-4 text-lg font-medium  
+          transition-all duration-500 ease-in-out shadow-2xl z-10 pt-10 ${
             isMenuOpen
-              ? "right-0 opacity-100 top-0 "
-              : "-right-80 opacity-0 top-0"
+              ? "left-0 opacity-100 !top-0"
+              : "-left-80 opacity-0 !top-0"
           }`}
+        >
+          <button
+            className="absolute top-2 right-2"
+            onClick={() => setIsMenuOpen(false)}
           >
-            <li className="text-white duration-200 hover:text-gray-300">
-              <a href="#">Component</a>
-            </li>
-            <li className="text-white duration-200 hover:text-gray-300">
-              <a href="#">Template</a>
-            </li>
-            <li>
-              <ContactButton />
-            </li>
-          </ul>
-        </div>
+            <svg
+              className="text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+
+          <MenuItem />
+          <li>
+            <ContactButton />
+          </li>
+        </ul>
       </nav>
     </header>
   );

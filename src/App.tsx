@@ -1,5 +1,6 @@
 import FancyBtn from "./components/FancyBtn";
 import Layout from "./components/layout/Layout";
+import Modal from "./components/Modal";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         </p>
       </section>
       <FancyBtn />
+      <Modal />
     </Layout>
   );
 }

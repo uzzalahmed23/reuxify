@@ -6,3 +6,37 @@
 body {
   font-family: "Instrument Sans", serif;
 }
+@keyframes animateModal {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animateModalOut {
+  from {
+    top: 0;
+    opacity: 1;
+  }
+  to {
+    top: -300px;
+    opacity: 0;
+  }
+}
+
+.modalContent {
+  animation-duration: 0.4s;
+  animation-timing-function: ease;
+}
+
+.modal-enter {
+  animation-name: animateModal;
+}
+
+.modal-exit {
+  animation-name: animateModalOut;
+}
