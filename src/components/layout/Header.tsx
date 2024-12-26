@@ -1,7 +1,18 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import logo from "../../assets/logo.svg";
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const mobileMenu = useRef(null);
+
+  useEffect(() => {
+    function closeOnOutSideClick(e) {
+      if (mobileMenu.current && !mobileMenu.current.contains(e.target)) {
+        setIsMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", closeOnOutSideClick);
+  }, [isMenuOpen]);
+
   return (
     <header className="bg-[#246A52]">
       <nav className="container flex items-center justify-between px-4 py-5 mx-auto md:px-0">
@@ -45,45 +56,52 @@ function Header() {
             ></path>
           </svg>
         </button>
-        <ul
-          className={`fixed top-16 h-full w-2/3 bg-[#246A52] md:hidden  flex flex-col items-center gap-4 py-4 text-lg font-medium  
-          transition-all duration-500 ease-in-out shadow-2xl z-10 pt-10 ${
-            isMenuOpen
-              ? "left-0 opacity-100 !top-0"
-              : "-left-80 opacity-0 !top-0"
+        {/* mobile menu  */}
+        <div
+          className={`fixed inset-0 md:hidden  bg-[rgba(255,255,255,0.5)] backdrop-blur-[2px] z-10 size-full transition-all duration-500 ease-in-out ${
+            isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
           }`}
         >
-          <button
-            className="absolute top-2 right-2"
-            onClick={() => setIsMenuOpen(false)}
+          <ul
+            ref={mobileMenu}
+            className={`relative z-20 top-16 h-full w-2/3 shadow-2xl bg-[#246A52]  flex flex-col items-center gap-4 py-4 text-lg font-medium  
+      transition-all duration-500 ease-in-out pt-10 ${
+        isMenuOpen ? "left-0 opacity-100 !top-0" : "-left-80 opacity-0 !top-0"
+      }`}
           >
-            <svg
-              className="text-white"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+            <button
+              className="absolute top-2 right-2"
+              onClick={() => setIsMenuOpen(false)}
             >
-              <path d="M18 6 6 18" />
-              <path d="m6 6 12 12" />
-            </svg>
-          </button>
+              <svg
+                className="text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+              </svg>
+            </button>
 
-          <MenuItem />
-          <li>
-            <ContactButton />
-          </li>
-        </ul>
+            <MenuItem />
+            <li>
+              <ContactButton />
+            </li>
+          </ul>
+        </div>
       </nav>
     </header>
   );
 }
 export default Header;
+
 export function MenuItem() {
   return (
     <>

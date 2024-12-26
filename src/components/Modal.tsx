@@ -81,5 +81,4 @@ function Modal() {
     </section>
   );
 }
-
 export default Modal;
